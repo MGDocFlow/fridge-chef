@@ -1,6 +1,15 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { JSDOM } from 'jsdom';
-import main from '../index';
+import main from '../../../src/index';
+
+vi.mock('../../../src/index', () => {
+  return {
+    default: () => {},
+    CONFIG: { PORT: 8081 },
+  };
+});
+
+process.env.NODE_ENV = 'test';
 
 describe('index.js', () => {
   let dom;

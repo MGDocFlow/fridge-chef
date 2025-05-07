@@ -1,3 +1,10 @@
+import inputIngredients from './ingredientInput';
+import generateRecipes from '../recipeGenerator';
+import displayRecipe from './recipeDisplay';
+import { setRecipeVisible, setCurrentRecipe } from '../stateManager';
+import { showElement, updateElementText } from '../domUtils';
+import { validateIngredients, generateRecipe } from '../recipeManager';
+
 export function renderUI() {
   const appContainer = document.createElement('div');
   appContainer.style.display = 'flex';
@@ -39,9 +46,12 @@ export function renderUI() {
   generateButton.addEventListener('click', () => {
     const ingredients = inputField.value.split(',').map(ingredient => ingredient.trim());
     try {
-      const validIngredients = inputIngredients(ingredients);
-      const recipes = generateRecipes(validIngredients);
-      recipes.forEach(recipe => displayRecipe(recipe));
+      const validIngredients = validateIngredients(ingredients);
+      const recipe = generateRecipe(validIngredients);
+      setCurrentRecipe(recipe);
+      setRecipeVisible(true);
+      updateElementText('.recipe', recipe);
+      showElement('.recipe');
     } catch (error) {
       alert(error.message);
     }
@@ -52,4 +62,14 @@ export function renderUI() {
   appContainer.appendChild(inputField);
   appContainer.appendChild(generateButton);
   document.body.appendChild(appContainer);
+}
+
+export function updateRecipeContainer(recipe) {
+  const recipeContainer = document.querySelector('.recipe');
+  if (recipeContainer) {
+    recipeContainer.style.display = 'block';
+    recipeContainer.textContent = recipe;
+  } else {
+    console.error('Recipe container not found');
+  }
 }

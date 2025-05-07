@@ -21,6 +21,10 @@
     },
     "config/playwright.config.js": {
       "description": "Configura Playwright per eseguire test end-to-end in modo efficiente e coerente con l'architettura del progetto."
+    },
+    "test": {
+      "description": "Esegui i test utilizzando npm run per evitare problemi di PATH.",
+      "command": "npm run"
     }
   },
   "postIterationActions": [

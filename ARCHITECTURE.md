@@ -69,6 +69,50 @@ npx playwright test e2e-tests/<nome-del-test>.test.js
 - **Errori 404**: Verifica i percorsi dei file.
 - **Conflitti di Porta**: Modifica la porta nel file di configurazione.
 
+## Struttura dei Test
+
+La struttura dei test è organizzata per tipologia e runner, seguendo le seguenti linee guida:
+
+### Tipologie di Test
+- **Unit Test**: Testano singole unità di codice, come funzioni o componenti.
+- **End-to-End (E2E) Test**: Verificano il comportamento complessivo dell'applicazione simulando interazioni utente.
+- **Integration Test**: Testano l'interazione tra più moduli o componenti.
+
+### Runner di Test
+- **Vitest**: Utilizzato per unit test e test di integrazione.
+- **Playwright**: Utilizzato per test end-to-end.
+
+### Struttura delle Cartelle
+
+```
+tests/
+  unit/
+    vitest/
+      index.test.js
+      ingredientInput.test.js
+      recipeDisplay.test.js
+      recipeGenerator.test.js
+  e2e/
+    playwright/
+      staticFiles.e2e.test.js
+      ui.e2e.test.js
+  integration/
+    vitest/
+      api.test.js
+      database.test.js
+  helpers/
+    mockData.js
+    testUtils.js
+src/
+  ...existing code...
+config/
+  constants.js
+  playwright.config.js
+  vitest.config.js
+```
+
+Questa struttura garantisce chiarezza, modularità e scalabilità, facilitando l'aggiunta di nuovi test e il supporto per nuovi runner.
+
 ## Approccio allo Sviluppo
 L'approccio allo sviluppo segue i principi di modularità, testabilità e iterazione continua:
 

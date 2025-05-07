@@ -9,6 +9,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Watcher output
+watcher.log
+
 # Runtime data
 pids
 *.pid

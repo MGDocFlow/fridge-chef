@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .test-result {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .passed {
+            background-color: #e0f7e9;
+            border-color: #2e7d32;
+        }
+        .failed {
+            background-color: #ffebee;
+            border-color: #c62828;
+        }
+        .details {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Report</h1>
+    <div id="test-results">
+        <!-- Test results will be dynamically inserted here -->
+    </div>
+    <script>
+        async function loadTestResults() {
+            const response = await fetch('/test-results/report.json');
+            const testResults = await response.json();
+
+            const resultsContainer = document.getElementById('test-results');
+            resultsContainer.innerHTML = '';
+
+            testResults.suites.forEach(suite => {
+                suite.tests.forEach(test => {
+                    const resultDiv = document.createElement('div');
+                    resultDiv.className = `test-result ${test.status}`;
+
+                    const title = document.createElement('h2');
+                    title.textContent = test.title;
+                    resultDiv.appendChild(title);
+
+                    const status = document.createElement('p');
+                    status.textContent = `Status: ${test.status}`;
+                    resultDiv.appendChild(status);
+
+                    const details = document.createElement('p');
+                    details.className = 'details';
+                    details.textContent = test.error ? test.error.message : 'Test passed successfully';
+                    resultDiv.appendChild(details);
+
+                    resultsContainer.appendChild(resultDiv);
+                });
+            });
+        }
+
+        loadTestResults();
+    </script>
+</body>
+</html>
