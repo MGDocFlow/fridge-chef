@@ -39,6 +39,36 @@ I test unitari devono essere progettati per essere molto rapidi, in modo da pote
 - Esempi di test:
   - `ui.test.js` verifica il caricamento dell'interfaccia utente e la generazione delle ricette.
 
+### Test End-to-End con Playwright
+
+I test end-to-end si trovano nella directory `e2e-tests/` e utilizzano Playwright per simulare interazioni utente e verificare il comportamento dell'applicazione.
+
+#### Configurazione di Playwright
+- **`testDir`**: Directory dei test (`e2e-tests`).
+- **`baseURL`**: `http://localhost:8081`.
+- **`headless`**: I test vengono eseguiti in modalità headless per velocità.
+- **`trace`**: Tracce abilitate per il debugging.
+
+#### Esecuzione dei Test
+
+Per eseguire tutti i test:
+
+```bash
+npx playwright test
+```
+
+Per eseguire un test specifico:
+
+```bash
+npx playwright test e2e-tests/<nome-del-test>.test.js
+```
+
+#### Debugging
+
+- **Errori di Connessione**: Assicurati che il server sia in esecuzione.
+- **Errori 404**: Verifica i percorsi dei file.
+- **Conflitti di Porta**: Modifica la porta nel file di configurazione.
+
 ## Approccio allo Sviluppo
 L'approccio allo sviluppo segue i principi di modularità, testabilità e iterazione continua:
 
