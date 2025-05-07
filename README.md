@@ -1,77 +1,53 @@
-# fridge-chef
+# Fridge Chef
 
-## Recipe Generation
+## Panoramica del Progetto
+Fridge Chef è un'applicazione progettata per generare ricette basate sugli ingredienti forniti dagli utenti. Utilizza un'architettura modulare per garantire una chiara separazione delle responsabilità e una facile manutenibilità.
 
-The recipe maker generates recipes based on the ingredients provided by the user. It uses an AI tool to decide which recipes are most appropriate given the user's ingredients.
+### Funzionalità Principali
+- **Input degli Ingredienti**: Gli utenti possono inserire gli ingredienti disponibili. L'input è validato per garantire che sia una lista corretta.
+- **Generazione delle Ricette**: Un sistema AI genera ricette basate sugli ingredienti forniti.
+- **Visualizzazione delle Ricette**: Le ricette generate vengono mostrate con istruzioni e ingredienti richiesti.
 
-## Ingredient Input
+## Struttura dell'Applicazione
+L'applicazione è organizzata in modo modulare:
 
-Users can input the ingredients they have available. The input is validated to ensure it is a list of ingredients.
+- **`src/`**: Contiene il codice sorgente dell'applicazione.
+  - **`index.js`**: Punto di ingresso principale.
+  - **`components/`**: Contiene componenti modulari come `ingredientInput.js`, `recipeDisplay.js` e `uiRenderer.js`.
+  - **`recipeGenerator.js`**: Logica per generare ricette.
+- **`public/`**: Risorse statiche come immagini e file HTML.
+  - **`index.html`**: Pagina principale dell'applicazione.
+  - **`assets/`**: Risorse aggiuntive come immagini e icone.
+- **`config/`**: File di configurazione, inclusi `constants.js` e `playwright.config.js`.
+- **`tests/`**: Contiene i test unitari, di integrazione ed end-to-end.
+- **`test-results/`**: Risultati dettagliati dei test.
 
-## How to Use
+## Architettura dei Test
 
-1. Input the ingredients you have available.
-2. The AI tool will generate a list of recipes based on the provided ingredients.
-3. The generated recipe will be displayed with a list of instructions and required ingredients.
+### Tipologie di Test
+- **Unit Test**: Testano singole unità di codice, come funzioni o componenti, utilizzando **Vitest**.
+- **End-to-End (E2E) Test**: Verificano il comportamento complessivo dell'applicazione con **Playwright**.
+- **Integration Test**: Testano l'interazione tra più moduli o componenti.
 
-## Features
-
-- Recipe Generation: Generates recipes based on user-provided ingredients.
-- Recipe Display: Displays the generated recipe with a list of instructions and required ingredients.
-- Ingredient Input: Allows users to input ingredients they have available.
-
-## Color Scheme
-
-The UI has a green color scheme.
-
-## Layout
-
-The layout is clean and organized to make it easy to read the recipes.
-
-## Typography
-
-Clean and readable sans-serif fonts are used for easy reading of recipes.
-
-## Iconography
-
-Simple, outline-style icons are used for ingredients and actions.
-
-## Aggiornamenti Recenti
-
-- La directory `dist/` è stata rimossa per semplificare la struttura del progetto.
-- I risultati dei test sono ora consolidati nella directory `test-results/`.
-- La directory `html/` è stata eliminata poiché era vuota e non necessaria.
-
-## Test End-to-End
-
-I test end-to-end utilizzano Playwright per verificare il comportamento dell'applicazione. Per eseguire i test:
-
-```bash
-npx playwright test
+### Struttura delle Cartelle dei Test
 ```
-
-Se si desidera eseguire un test specifico:
-
-```bash
-npx playwright test e2e-tests/<nome-del-test>.test.js
+tests/
+  unit/
+    vitest/
+      domUtils.test.js
+      index.test.js
+      ingredientInput.test.js
+  e2e/
+    playwright/
+      staticFiles.e2e.test.js
+      ui.e2e.test.js
+  integration/
+    vitest/
+      api.test.js
+      database.test.js
 ```
-
-### Debugging dei Test
-
-- **Errori di Connessione**: Verifica che il server HTTP sia in esecuzione su `http://localhost:8081`.
-- **Errori 404**: Assicurati che i file richiesti siano presenti nella directory corretta.
-- **Conflitti di Porta**: Libera la porta o modifica la configurazione nel file `playwright.config.js`.
-
-## Struttura dei Test
-
-La struttura dei test è organizzata per tipologia e runner. Segue le seguenti linee guida:
-
-- **Unit Test**: Si trovano in `tests/unit/vitest/` e utilizzano Vitest.
-- **End-to-End Test**: Si trovano in `tests/e2e/playwright/` e utilizzano Playwright.
-- **Integration Test**: Si trovano in `tests/integration/vitest/` e utilizzano Vitest.
 
 ### Esecuzione dei Test
-
 - **Unit Test**:
   ```bash
   npm run test:unit
@@ -85,26 +61,38 @@ La struttura dei test è organizzata per tipologia e runner. Segue le seguenti l
   npm run test:integration
   ```
 
-Questa organizzazione facilita la gestione e l'esecuzione dei test.
+## Workflow di Sviluppo
 
-## Configurazioni
+1. **Setup dell'Ambiente**:
+   - Avviare il server di sviluppo con `npm start`.
+   - Assicurarsi che l'applicazione sia accessibile su `http://localhost:<PORT>`.
 
-La directory `config/` contiene i file di configurazione necessari per il progetto. Attualmente include:
+2. **Scrittura del Codice**:
+   - Implementare nuove funzionalità nei file appropriati in `src/`.
+   - Aggiungere nuovi componenti nella directory `src/components/`.
 
-- **`playwright.config.js`**: Configurazione per i test end-to-end con Playwright.
-- **Nota**: Il file `config/test-config.js` è stato rimosso. Tutte le configurazioni sono ora centralizzate in `constants.js`.
+3. **Scrittura dei Test**:
+   - Scrivere test unitari per ogni nuova funzionalità in `tests/unit/vitest/`.
+   - Scrivere test end-to-end in `tests/e2e/playwright/`.
 
-Questa directory è destinata a contenere tutti i file di configurazione necessari per strumenti o ambienti futuri.
+4. **Esecuzione dei Test**:
+   - Eseguire i test unitari con `npm test`.
+   - Eseguire i test end-to-end con `npm run test:e2e`.
 
-## Simulazione di Workflow CI Locale
+5. **Debugging**:
+   - Analizzare i risultati dei test in `test-results/`.
+   - Utilizzare i file di traccia per identificare i problemi.
 
-Per simulare un workflow CI locale e generare un report dei test:
+6. **Deployment**:
+   - Preparare l'applicazione per la produzione assicurandosi che tutti i test passino.
+   - Distribuire i file statici dalla directory `public/`.
 
-1. Esegui lo script `test:ci`:
-   ```bash
-   npm run test:ci
-   ```
+## Debugging dei Test
 
-2. I risultati dei test saranno salvati in formato JUnit nella directory `test-results/` con il nome `junit-report.xml`.
+- **Errori di Connessione**: Verifica che il server HTTP sia in esecuzione su `http://localhost:8081`.
+- **Errori 404**: Assicurati che i file richiesti siano presenti nella directory corretta.
+- **Conflitti di Porta**: Libera la porta o modifica la configurazione nel file `playwright.config.js`.
 
-3. Puoi visualizzare il report utilizzando strumenti compatibili con il formato JUnit o estensioni di Visual Studio Code come "JUnit Viewer".
+## Manutenzione della Documentazione
+
+È fondamentale mantenere questo file aggiornato ogni volta che vengono apportate modifiche significative all'architettura o al workflow del progetto. Questo garantisce una visione chiara e aggiornata per tutti i membri del team.
