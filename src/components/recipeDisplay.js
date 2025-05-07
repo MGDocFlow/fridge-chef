@@ -1,4 +1,4 @@
-function displayRecipe(recipe) {
+export default function displayRecipe(recipe) {
   const recipeContainer = document.createElement('div');
   recipeContainer.style.display = 'flex';
   recipeContainer.style.flexDirection = 'column';
@@ -36,5 +36,3 @@ function displayRecipe(recipe) {
 
   document.body.appendChild(recipeContainer);
 }
-
-module.exports = displayRecipe;

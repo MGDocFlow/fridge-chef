@@ -35,3 +35,9 @@ Clean and readable sans-serif fonts are used for easy reading of recipes.
 ## Iconography
 
 Simple, outline-style icons are used for ingredients and actions.
+
+## Aggiornamenti Recenti
+
+- La directory `dist/` è stata rimossa per semplificare la struttura del progetto.
+- I risultati dei test sono ora consolidati nella directory `test-results/`.
+- La directory `html/` è stata eliminata poiché era vuota e non necessaria.

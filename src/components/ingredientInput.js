@@ -1,4 +1,4 @@
-function inputIngredients(ingredients) {
+export default function inputIngredients(ingredients) {
   if (!Array.isArray(ingredients)) {
     throw new Error('Input must be a list of ingredients');
   }
@@ -11,5 +11,3 @@ function inputIngredients(ingredients) {
 
   return ingredients;
 }
-
-module.exports = inputIngredients;

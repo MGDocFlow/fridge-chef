@@ -1,0 +1,36 @@
+{
+  "ignore": [
+    "results/**",
+    "test-results/**",
+    "public/assets/**",
+    "e2e-tests/**/*.zip",
+    "e2e-tests/**/*.md"
+  ],
+  "rules": {
+    "ARCHITECTURE.md": {
+      "description": "Segui le linee guida descritte in questo file per mantenere l'architettura e il workflow del progetto."
+    },
+    "src/**/*.js": {
+      "description": "Scrivi codice modulare e testabile, seguendo il pattern descritto in ARCHITECTURE.md."
+    },
+    "src/tests/**/*.test.js": {
+      "description": "Scrivi test unitari utilizzando Vitest, seguendo le best practice descritte in ARCHITECTURE.md."
+    },
+    "e2e-tests/**/*.test.js": {
+      "description": "Scrivi test end-to-end utilizzando Playwright, seguendo le best practice descritte in ARCHITECTURE.md."
+    },
+    "config/playwright.config.js": {
+      "description": "Configura Playwright per eseguire test end-to-end in modo efficiente e coerente con l'architettura del progetto."
+    }
+  },
+  "postIterationActions": [
+    {
+      "action": "updateDocumentation",
+      "description": "Al termine di ogni iterazione, verifica se è necessario aggiornare la documentazione, incluse le sezioni in ARCHITECTURE.md e README.md."
+    },
+    {
+      "action": "runUnitTests",
+      "description": "Esegui automaticamente i test unitari dopo ogni modifica al progetto per garantire la stabilità del codice."
+    }
+  ]
+}

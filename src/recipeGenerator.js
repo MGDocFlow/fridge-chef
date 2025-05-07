@@ -1,4 +1,4 @@
-function generateRecipes(ingredients) {
+export default function generateRecipes(ingredients) {
   // Placeholder logic to generate recipes based on the provided ingredients
   const recipes = [
     { name: 'Pasta al Pomodoro', ingredients: ['pasta', 'pomodoro', 'basilico'] },
@@ -6,5 +6,3 @@ function generateRecipes(ingredients) {
   ];
   return recipes;
 }
-
-module.exports = generateRecipes;
